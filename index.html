@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Generated | Dev Modz</title>
+    <title>Key Generated | NINJA ARASHI</title>
     <style>
         :root { --bg: #000000; --card: #121212; --text: #ffffff; --accent: #00ff88; --error: #ff4444; }
         
@@ -168,26 +168,33 @@
         </div>
     </div>
 
-    <div class="footer">DEV MODZ SECURITY SYSTEM</div>
+    <div class="footer">NINJA ARASHI SECURITY SYSTEM</div>
 </div>
 
 <script>
     async function checkSecurity() {
         const urlParams = new URLSearchParams(window.location.search);
         const source = urlParams.get('source');
-        const referrer = document.referrer;
         
-        if (source === "official" || referrer.includes("earnlinks.io") || referrer.includes("lootdest.org") || referrer.includes("steps.html")) {
-            if (source === "official") {
-                const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-                window.history.replaceState({}, document.title, cleanUrl);
-            }
+        console.log('=== Security Check ===');
+        console.log('Source:', source);
+        console.log('Referrer:', document.referrer);
+        console.log('==================');
+
+        const isAllowed = source === "official";
+        
+        if (isAllowed) {
+            const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+            
             document.getElementById('mainContainer').style.display = "block";
+            document.getElementById('bypassContainer').style.display = "none";
+            
             generateLockedKey(); 
         } else {
+            // BLOCK: Direct access, no VPLink
             document.getElementById('mainContainer').style.display = "none";
             document.getElementById('bypassContainer').style.display = "block";
-            document.getElementById('finalKey').innerText = "ACCESS DENIED";
         }
     }
 
@@ -220,7 +227,7 @@
             segments.push(s);
         }
 
-        const finalKey = "NINJAPLUS-" + segments.join("-");
+        const finalKey = "UKM-" + segments.join("-");
         document.getElementById('finalKey').innerText = finalKey;
 
     } catch (err) {
